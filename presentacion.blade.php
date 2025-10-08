@@ -1,0 +1,1 @@
+echo "<div><h2>Hola, soy Iara</h2><p>Estudiante de la escuela secundaria de innovacion de misiones actualemte estoy cursando mi ultimo año 5to 🚀</p></div>" > resources/views/partials/presentacion.blade.php

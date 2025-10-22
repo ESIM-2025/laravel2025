@@ -1,12 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ModelController;
+use App\Http\Controllers\ModelosExplicacionController;
 
 
 
 Route::get('/', function () {
-    return view('partials.ludmila'); // usa el punto para indicar subcarpeta
+    return view('partials.ludmila'); 
 });
-Route::get('/', [ModelController::class, 'index']);
+Route::get('/explicacion-modelos', [ModelosExplicacionController::class, 'index']);
 

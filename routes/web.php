@@ -6,7 +6,7 @@ use App\Http\Controllers\ModelosExplicacionController;
 
 
 Route::get('/', function () {
-    return view('partials.ludmila'); 
+    return view('partials.nicolas'); 
 });
 Route::get('/explicacion-modelos', [ModelosExplicacionController::class, 'index']);
 

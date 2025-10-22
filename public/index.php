@@ -20,4 +20,4 @@ if ($requestUri === '/' || $requestUri === '/tutorial-validacion') {
 } else {
     http_response_code(404);
     echo "Página no encontrada - ESIM 2025 Tutorial de Validación";
-}
+} 

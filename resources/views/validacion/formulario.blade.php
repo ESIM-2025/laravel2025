@@ -1,3 +1,26 @@
+<?php
+// Simular funciones de Laravel
+$errors = $errors ?? [];
+$success = $success ?? null;
+$datos = $datos ?? null;
+
+// Función helper para old()
+function old($field, $default = '') {
+    return $_POST[$field] ?? $default;
+}
+
+// Función helper para verificar errores
+function hasError($field) {
+    global $errors;
+    return isset($errors[$field]);
+}
+
+// Función helper para get error message
+function getError($field) {
+    global $errors;
+    return $errors[$field] ?? '';
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -30,109 +53,120 @@
             </div>
 
             <!-- Alertas -->
-            @if(session('success'))
+            <?php if ($success): ?>
                 <div class="alert alert-success success-alert d-flex align-items-center">
                     <span class="me-2">✅</span>
-                    <div>{{ session('success') }}</div>
+                    <div><?php echo $success; ?></div>
                 </div>
-            @endif
+            <?php endif; ?>
 
-            @if(session('datos'))
+            <?php if ($datos): ?>
                 <div class="alert alert-info">
                     <h6 class="alert-heading">📊 Datos Procesados:</h6>
-                    <pre class="mb-0"><code>{{ json_encode(session('datos'), JSON_PRETTY_PRINT) }}</code></pre>
+                    <pre class="mb-0"><code><?php echo json_encode($datos, JSON_PRETTY_PRINT); ?></code></pre>
                 </div>
-            @endif
+            <?php endif; ?>
+
+            <!-- Mostrar errores generales -->
+            <?php if (!empty($errors) && is_array($errors)): ?>
+                <div class="alert alert-danger">
+                    <strong>❌ Errores de validación:</strong>
+                    <ul class="mb-0 mt-2">
+                        <?php foreach($errors as $error): ?>
+                            <li><?php echo $error; ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
 
             <!-- Formulario -->
             <div class="card shadow-sm">
                 <div class="card-body p-4">
                     <form method="POST" action="/procesar-formulario">
-                        @csrf
 
                         <!-- Nombre -->
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Nombre completo *</label>
-                            <input type="text" class="form-control @error('nombre') is-invalid @enderror" 
-                                   id="nombre" name="nombre" value="{{ old('nombre') }}" 
+                            <input type="text" class="form-control <?php echo hasError('nombre') ? 'is-invalid' : ''; ?>" 
+                                   id="nombre" name="nombre" value="<?php echo htmlspecialchars(old('nombre')); ?>" 
                                    placeholder="Ingresa tu nombre completo">
-                            @error('nombre')
-                                <div class="error-message">{{ $message }}</div>
-                            @enderror
+                            <?php if (hasError('nombre')): ?>
+                                <div class="error-message"><?php echo getError('nombre'); ?></div>
+                            <?php endif; ?>
                         </div>
 
                         <!-- Email -->
                         <div class="mb-3">
                             <label for="email" class="form-label">Correo electrónico *</label>
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" 
-                                   id="email" name="email" value="{{ old('email') }}" 
+                            <input type="email" class="form-control <?php echo hasError('email') ? 'is-invalid' : ''; ?>" 
+                                   id="email" name="email" value="<?php echo htmlspecialchars(old('email')); ?>" 
                                    placeholder="ejemplo@esim.edu">
-                            @error('email')
-                                <div class="error-message">{{ $message }}</div>
-                            @enderror
+                            <?php if (hasError('email')): ?>
+                                <div class="error-message"><?php echo getError('email'); ?></div>
+                            <?php endif; ?>
                         </div>
 
                         <!-- Edad -->
                         <div class="mb-3">
                             <label for="edad" class="form-label">Edad *</label>
-                            <input type="number" class="form-control @error('edad') is-invalid @enderror" 
-                                   id="edad" name="edad" value="{{ old('edad') }}" 
+                            <input type="number" class="form-control <?php echo hasError('edad') ? 'is-invalid' : ''; ?>" 
+                                   id="edad" name="edad" value="<?php echo htmlspecialchars(old('edad')); ?>" 
                                    placeholder="18" min="17" max="60">
-                            @error('edad')
-                                <div class="error-message">{{ $message }}</div>
-                            @enderror
+                            <?php if (hasError('edad')): ?>
+                                <div class="error-message"><?php echo getError('edad'); ?></div>
+                            <?php endif; ?>
                         </div>
 
                         <!-- Matrícula -->
                         <div class="mb-3">
                             <label for="matricula" class="form-label">Matrícula *</label>
-                            <input type="text" class="form-control @error('matricula') is-invalid @enderror" 
-                                   id="matricula" name="matricula" value="{{ old('matricula') }}" 
+                            <input type="text" class="form-control <?php echo hasError('matricula') ? 'is-invalid' : ''; ?>" 
+                                   id="matricula" name="matricula" value="<?php echo htmlspecialchars(old('matricula')); ?>" 
                                    placeholder="ESIM2025001" maxlength="10">
                             <div class="form-text">Formato: ESIM seguido de 6 números (Ej: ESIM2025001)</div>
-                            @error('matricula')
-                                <div class="error-message">{{ $message }}</div>
-                            @enderror
+                            <?php if (hasError('matricula')): ?>
+                                <div class="error-message"><?php echo getError('matricula'); ?></div>
+                            <?php endif; ?>
                         </div>
 
                         <!-- Carrera -->
                         <div class="mb-3">
                             <label for="carrera" class="form-label">Carrera *</label>
-                            <select class="form-select @error('carrera') is-invalid @enderror" 
+                            <select class="form-select <?php echo hasError('carrera') ? 'is-invalid' : ''; ?>" 
                                     id="carrera" name="carrera">
                                 <option value="">Selecciona una carrera</option>
-                                <option value="ingenieria" {{ old('carrera') == 'ingenieria' ? 'selected' : '' }}>Ingeniería</option>
-                                <option value="medicina" {{ old('carrera') == 'medicina' ? 'selected' : '' }}>Medicina</option>
-                                <option value="administracion" {{ old('carrera') == 'administracion' ? 'selected' : '' }}>Administración</option>
+                                <option value="ingenieria" <?php echo old('carrera') == 'ingenieria' ? 'selected' : ''; ?>>Ingeniería</option>
+                                <option value="medicina" <?php echo old('carrera') == 'medicina' ? 'selected' : ''; ?>>Medicina</option>
+                                <option value="administracion" <?php echo old('carrera') == 'administracion' ? 'selected' : ''; ?>>Administración</option>
                             </select>
-                            @error('carrera')
-                                <div class="error-message">{{ $message }}</div>
-                            @enderror
+                            <?php if (hasError('carrera')): ?>
+                                <div class="error-message"><?php echo getError('carrera'); ?></div>
+                            <?php endif; ?>
                         </div>
 
                         <!-- Mensaje -->
                         <div class="mb-3">
                             <label for="mensaje" class="form-label">Mensaje (opcional)</label>
-                            <textarea class="form-control @error('mensaje') is-invalid @enderror" 
+                            <textarea class="form-control <?php echo hasError('mensaje') ? 'is-invalid' : ''; ?>" 
                                       id="mensaje" name="mensaje" rows="3" 
-                                      placeholder="Escribe un mensaje adicional">{{ old('mensaje') }}</textarea>
-                            @error('mensaje')
-                                <div class="error-message">{{ $message }}</div>
-                            @enderror
+                                      placeholder="Escribe un mensaje adicional"><?php echo htmlspecialchars(old('mensaje')); ?></textarea>
+                            <?php if (hasError('mensaje')): ?>
+                                <div class="error-message"><?php echo getError('mensaje'); ?></div>
+                            <?php endif; ?>
                         </div>
 
                         <!-- Términos -->
                         <div class="mb-4">
                             <div class="form-check">
-                                <input class="form-check-input @error('terminos') is-invalid @enderror" 
+                                <input class="form-check-input <?php echo hasError('terminos') ? 'is-invalid' : ''; ?>" 
                                        type="checkbox" id="terminos" name="terminos" value="1" 
-                                       {{ old('terminos') ? 'checked' : '' }}>
+                                       <?php echo old('terminos') ? 'checked' : ''; ?>>
                                 <label class="form-check-label" for="terminos">
                                     Acepto los términos y condiciones *
                                 </label>
-                                @error('terminos')
-                                    <div class="error-message">{{ $message }}</div>
-                                @enderror
+                                <?php if (hasError('terminos')): ?>
+                                    <div class="error-message"><?php echo getError('terminos'); ?></div>
+                                <?php endif; ?>
                             </div>
                         </div>
 

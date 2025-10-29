@@ -17,7 +17,7 @@
         eso va en la terminal, despues  vamos a crear el controlador. 
 php artisan make:controller MiController
 
-        Una ves queya creamos vamos a resources/views/tutorial-controller.blade.php
+        Una ves que ya creamos vamos a resources/views/tutorial-controller.blade.php
         Ahí primero creamos en viws una carpeta llamda tutorial, despues dentro de tutorial hacemos un blade : controller.blade.php
         Una ves que ya tenemos eso creado, dentro del blade vamos a poner lo siguiente (como base)<h3>
             

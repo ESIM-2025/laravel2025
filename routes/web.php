@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Rutas para el tutorial
+Route::get('/tutorial-controller', [TutorialController::class, 'index']);
+Route::get('/ejemplo-controller', [TutorialController::class, 'ejemplo']);

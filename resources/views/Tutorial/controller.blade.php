@@ -21,7 +21,7 @@ php artisan make:controller MiController
         Ahí primero creamos en viws una carpeta llamda tutorial, despues dentro de tutorial hacemos un blade : controller.blade.php
         Una ves que ya tenemos eso creado, dentro del blade vamos a poner lo siguiente (como base)<h3>
             
-        (<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Tutorial - Controllers</title>
@@ -29,11 +29,7 @@ php artisan make:controller MiController
 <body>
     <h1>🚀 Tutorial de Controllers</h1>
     <p>Controlador creado exitosamente</p>
-</body>
-</html>)
-        ()<-- los parentesis son para marcar lo q tenemos q poner nomas.
-        Despues de que se creo nuestro tutorialcontroller, vamos a agregarle el siguiente codigo
-(<?php
+<p> <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
@@ -43,13 +39,7 @@ class TutorialController extends Controller
     {
         return view('tutorial-controller');
     }
-})
-
-Una ves que ya tenemos eso vamosa  routes/web.php y al codigo que ya tenemos ahí vamos agregar al final sin modificar nada el siguiente codigo
-    (use App\Http\Controllers\TutorialController;
-Route::get('/tutorial-controller', [TutorialController::class, 'index']);)
-
-Y por ultimo tenemos q subir todo al github, 
-    (git add .
-git commit -m "feat: add tutorial básico sobre controllers"
-git push origin feature-controller)
+}<p>
+</body>
+</html>
+        

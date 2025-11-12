@@ -7,6 +7,6 @@ Route::get('/', function () {
 });
 
 // Rutas para el tutorial
-Route::get('/tutorial-controller', [TutorialController::class, 'index']);
+Route::get('/tutorial-controller', ['app\Http\Controllers\TutorialController'::class, 'index']);
 Route::get('/ejemplo-controller', [TutorialController::class, 'ejemplo']);
   

@@ -1,6 +1,3 @@
-@section('title', 'Tutorial: Vistas Blade y Partials')
-
-@section('content')
 <div class="container mt-5">
     <h1 class="text-center mb-4">Vistas Blade y Partials en Laravel</h1>
 

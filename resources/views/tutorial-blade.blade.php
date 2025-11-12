@@ -1,5 +1,3 @@
-@extends('layouts.app')
-
 @section('title', 'Tutorial: Vistas Blade y Partials')
 
 @section('content')
@@ -16,17 +14,17 @@
 
     <h2>1. ¿Qué es una vista Blade?</h2>
     <p>
-        Las vistas en Laravel se almacenan en <code>resources/views</code>.  
-        Los archivos usan la extensión <code>.blade.php</code>.
+        Las vistas en Laravel se almacenan en resources/views  
+        Los archivos usan la extensión .blade.php.
     </p>
-    <p><strong>Ejemplo:</strong> <code>resources/views/welcome.blade.php</code></p>
+    <p><strong>Ejemplo:</strong> resources/views/welcome.blade. php </p>
 
     <h2>2. Sintaxis básica de Blade</h2>
     <ul>
-        <li><code>{{ $variable }}</code> → Muestra el valor escapado (seguro contra XSS).</li>
-        <li><code>{!! $html !!}</code> → Muestra HTML sin escapar.</li>
-        <li><code>@if, @foreach, @include, @extends</code> → Directivas de control.</li>
-    </ul>
+        <li>→ Muestra el valor escapado (seguro contra XSS).</li>
+        <li>→ Muestra HTML sin escapar.</li>
+        <li> → Directivas de control.</li>
+     </ul>
 
     <h2>3. ¿Qué es un Partial?</h2>
     <p>
@@ -40,7 +38,7 @@
 </footer></code></pre>
 
     <h3>Incluir el partial en una vista:</h3>
-    <pre><code>@include('partials.footer')</code></pre>
+   
 
     <h2>4. Beneficios de usar Partials</h2>
     <ul>
@@ -52,9 +50,9 @@
     <h2>5. Ejemplo práctico en este proyecto</h2>
     <p>
         En este repositorio, cada estudiante creó su propio partial en:
-        <code>resources/views/partials/[nombre].blade.php</code>
+        
         y lo puede incluir con:
-        <code>@include('partials.nombre')</code>
+       
     </p>
 
     <div class="alert alert-info mt-4">
@@ -76,3 +74,4 @@
     </div>
 </div>
 @endsection
+

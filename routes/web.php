@@ -17,5 +17,9 @@ Route::get('/presentacion-nico', function () {return view('partials.nicolas'); }
 
 Route::get('/explicacion-modelos', [ModelosExplicacionController::class, 'index']);
 
+Route::get('/saludo-web/{nombre?}', function ($nombre = 'Invitado') {
+    return view('rutas_web_demo', ['nombre' => $nombre]);
+})->name('web.saludo');
+
     
 

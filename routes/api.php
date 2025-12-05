@@ -17,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/saludo-api/{nombre?}', function ($nombre = 'Usuario API') {
+    return response()->json([
+        'message' => '👋 Datos obtenidos desde la API.',
+        'usuario' => $nombre,
+        'stateless' => true
+    ]);
+});

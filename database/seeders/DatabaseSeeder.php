@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,11 +13,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // LLAMAR a tu seeder (el nombre debe coincidir con el archivo que contiene la inserción)
+        $this->call([
+            EjemploSeeder::class, // Usa este si tu archivo se llama TutorialSeeder.php
+            // O si tu archivo se llama EjemploSeeder.php:
+            // EjemploSeeder::class, 
+        ]);
     }
 }

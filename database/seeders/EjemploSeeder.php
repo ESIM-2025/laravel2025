@@ -2,18 +2,27 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class EjemploSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Seed the application's database.
      *
      * @return void
      */
-    public function run()
-    {
-        //
-    }
+    // Ejemplo: database/seeders/TutorialSeeder.php
+// ...
+
+public function run()
+{
+    // Verifica que esta línea existe y está correcta:
+    \Illuminate\Support\Facades\DB::table('users')->insert([
+        'name' => 'Usuario Admin Seeder',
+        'email' => 'admin.seeder@tutorial.com',
+        'password' => \Illuminate\Support\Facades\Hash::make('password123'),
+        'created_at' => now(), // Asegúrate de incluir timestamps si la tabla los requiere
+        'updated_at' => now(),
+    ]);
+}
 }
